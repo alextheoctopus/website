@@ -3,8 +3,8 @@ const { resolve } = require('path');
 const path = require('path');
 
 class DB {
-    constructor({ NAME }) {
-        this.db = new sqlite3.Database(path.join(__dirname, NAME));
+    constructor() {
+        this.db = new sqlite3.Database(path.join(__dirname, 'courseWork.db'));
         this.token;
     }
 
@@ -21,18 +21,23 @@ class DB {
         return token;
     }
 
-    registration(data) {
+    registration(login, password) {
         let token = this.generateToken();
         const query = "INSERT INTO USERS ( token,login, password) VALUES( '" + token + "','" +
-            data.login + "','" + data.password + "')";
+            login + "','" + password + "')";
 
         this.db.run(query);
     }
-    getUser(login) {
-        const query = "SELECT token, login, password FROM USERS WHERE login='" + login + "'";
-        console.log(new Promise(resolve => this.db.all(query, (err, row) => resolve(err ? null : row))));
+    getUser( login, password ) {
+        const query = "SELECT token, login, password FROM USERS WHERE login='" + login + "' AND password='" + password + "'";
+        /*  console.log(query); */
+        return new Promise(resolve => this.db.get(query, (err, row) => resolve(err ? null : row)));
     }
-
+    updateToken(login) {
+        let token = this.generateToken();
+        const query = "UPDATE USERS SET token ='" + token + "' WHERE login='" + login + "'";
+        this.db.run(query);
+    }
 }
 
 module.exports = DB;

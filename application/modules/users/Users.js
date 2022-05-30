@@ -2,19 +2,13 @@ class Users {
     constructor(db) {
         this.db = db;
     }
-    loginMethod(login, password) {
-        let user = this.db.getUser(login);
-        let token = this.db.generateToken();
+    async loginMethod(login, password) {
+        let user  = await this.db.getUser(login, password);
         if (user) {
-            if (password == user.password) {
-                let updateUser = {
-                    'login': user.login,
-                    'token': token
-                }
-                return updateUser;
-            }
+            this.db.updateToken(user.login);
         }
     }
+
     logoutMethod() {
         return true; /* тут по токену нужно будет найти юзера которого кикнуть */
     }

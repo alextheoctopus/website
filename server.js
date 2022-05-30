@@ -10,9 +10,10 @@ const io = require('socket.io')(server, { //сокеты втыкаем в по�
 const { NAME, PORT, DATABASE } = require('./config.js');
 const DB = require('./application/modules/DB/DB');
 const APP = require('./application/Application');
-const db = new DB(DATABASE);
+const { Router } = require('express');
+const db = new DB();
 
-/* function router(method) {
+function router(method, params) {
     const app = new APP(params, db); //в параметрах будет метод + логин + пароль
     if (method) {
         switch (method) {
@@ -24,12 +25,32 @@ const db = new DB(DATABASE);
                 return app.logoutMethod();
         }
     }
-} */
+}
 
 io.on("connection", (socket) => {
     console.log(socket.id);
-    socket.on('send-message', (params) => {
+    socket.on('registration', async (params) => {
+        let { login, password } = params;
+        let result = await db.getUser(login, password);
+        if (!result) {
+            router('registration', params);
+            console.log("Вы зарегистрированы!")
+        } else {
+            console.log("Логин занят!");
+            router('login', params);
+        }
+        socket.emit('getName', login);
+    });
+    socket.on('authorization', async (params) => {
+        let { login, password } = params;
+        let result = await db.getUser(login, password);
+        if (result) {
+            router('login', params);
+            //socket.emit('getName', params);//не работает че-то
 
+        } else {
+            console.log("Проверьте правильность введенных данных");
+        }
     });
 });
 
