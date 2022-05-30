@@ -1,0 +1,49 @@
+#loginAuth,
+#login {
+    position: absolute;
+    width: 621px;
+    height: 88px;
+    left: 85;
+    top: 129;
+    background: #DFEEFF;
+    border-bottom: 3px solid #34393C;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#passwordAuth,
+#password {
+    position: absolute;
+    width: 621px;
+    height: 88px;
+    left: 85;
+    top: 269;
+    background: #DFEEFF;
+    border-bottom: 3px solid #34393C;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#authSbmBtn,
+#regSbmBtn {
+    position: absolute;
+    width: 349px;
+    height: 68px;
+    left: 221;
+    top: 439;
+    background: #FFCD24;
+}
+
+.reg-form,
+.authForm {
+    box-sizing: border-box;
+    position: absolute;
+    width: 791px;
+    height: 625px;
+    left: 325px;
+    top: 235px;
+    background: #DFEEFF;
+    border: 3px solid #29ABE3;
+}

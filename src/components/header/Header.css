@@ -1,0 +1,37 @@
+.header {
+    position: absolute;
+    width: 1440px;
+    height: 147px;
+    left: 0px;
+    top: 0px;
+    background: #9CC8E3;
+}
+
+#openRoom {
+    position: absolute;
+    width: 349px;
+    height: 68px;
+    left: 1061px;
+    top: 42px;
+    background: #9CC8E3;
+}
+
+#openRegi {
+    position: absolute;
+    width: 289px;
+    height: 68px;
+    left: 941px;
+    top: 42px;
+    background: #DBF0FD;
+    border: none;
+}
+
+#openAuth {
+    position: absolute;
+    width: 142px;
+    height: 68px;
+    left: 1268px;
+    top: 42px;
+    background: #DBF0FD;
+    border: none;
+}
