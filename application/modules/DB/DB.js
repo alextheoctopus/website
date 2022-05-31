@@ -1,5 +1,4 @@
 const sqlite3 = require('sqlite3').verbose();
-const { resolve } = require('path');
 const path = require('path');
 
 class DB {
@@ -28,7 +27,7 @@ class DB {
 
         this.db.run(query);
     }
-    getUser( login, password ) {
+    getUser(login, password) {
         const query = "SELECT token, login, password FROM USERS WHERE login='" + login + "' AND password='" + password + "'";
         /*  console.log(query); */
         return new Promise(resolve => this.db.get(query, (err, row) => resolve(err ? null : row)));
